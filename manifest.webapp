@@ -1,0 +1,24 @@
+{
+  "name": "rTuner",
+  "description": "A simple chromatic tuner.",
+  "launch_path": "/index.html",
+  "icons": {
+    "32": "res/icon-32.png",
+    "60": "res/icon-60.png",
+    "90": "res/icon-90.png",
+    "120": "res/icon-120.png",
+    "128": "res/icon-128.png",
+    "256": "res/icon-256.png"
+  },
+  "developer": {
+    "name": "elmisto",
+    "url": "http://elmisto.github.io/rtuner/"
+  },
+  "default_locale": "en",
+  "permissions": {
+    "audio-capture": {
+      "description": "Required to grab the pitch."
+    }
+  },
+  "version": "v1.0rc1"
+}

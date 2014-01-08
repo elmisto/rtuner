@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>rTuner</title>
+  <!-- Building blocks -->
+  <link rel="stylesheet" href="css/headers.css">
+  <link rel="stylesheet" href="css/seekbars.css">
+  <link rel="stylesheet" href="css/toolbars.css">
+  <link rel="stylesheet" href="css/progress_activity.css">
+  <link rel="stylesheet" href="css/lists.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="css/action_icons.css">
+
+  <!-- Transitions -->
+  <link rel="stylesheet" href="css/transitions.css">
+  
+  <!-- Util CSS: some extra tricks -->
+  <link rel="stylesheet" href="css/util.css">
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <!-- Additional markup to make Building Blocks kind of cross browser -->
+  <link rel="stylesheet" href="css/cross_browser.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    #tuner {
+      height: 100%;
+    }
+    [data-position="right"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      z-index: 15;
+      z-index: 100; /* -> drawer */
+    }
+    section[role="region"][data-position="right"] {
+      position: absolute;
+    }
+    [data-position="right"].current {
+      animation: rightToCurrent 0.4s forwards;
+      -webkit-animation: rightToCurrent 0.4s forwards;
+    }
+    [data-position="right"].right {
+      animation: currentToRight 0.4s forwards;
+      -webkit-animation: currentToRight 0.4s forwards;
+    }
+    [data-position="current"].left {
+      animation: currentToLeft 0.4s forwards;
+      -webkit-animation: currentToLeft 0.4s forwards;
+    }
+    [data-position="current"].current {
+      animation: leftToCurrent 0.4s forwards;
+      -webkit-animation: leftToCurrent 0.4s forwards;
+    }
+    [data-position="back"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      opacity: 0;
+      /* z-index: 100; -> drawer */
+    }
+    [data-position="back"].fade-in {
+      z-index: 120;
+      animation: fadeIn 0.2s forwards;
+      -webkit-animation: fadeIn 0.2s forwards;
+    }
+    [data-position="back"].fade-out {
+      animation: fadeOut 0.2s forwards;
+      -webkit-animation: fadeOut 0.2s forwards;
+    }
+
+    [data-position="edit-mode"] {
+      position: absolute;
+      top: -5rem;
+      left: 0;
+      right: 0;
+      bottom: -7rem;
+      z-index: -1;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    [data-position="edit-mode"].edit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 120;
+      opacity: 1;
+    }
+
+    /* Headers */
+    #headers section[role="region"] {
+      margin-bottom: 1.5rem;
+    }
+    #headers section[role="region"]:not(#drawer) {
+      display: inline;
+    }
+    #headers article header:first-child {
+      margin-top: 1.5rem;
+    }
+    #headers section[role="region"] header h2 {
+      margin: 0 0 1.5rem 0;
+    }
+
+    /* Lists */
+    /* to avoid double background effect on press */
+    [data-type=list] li>a:active { 
+      background-color: transparent;
+    }
+
+    /* Switches */
+    #switches label:last-child {
+      margin-left: 2rem;  
+    }
+
+    /* Scrolling */
+    nav[data-type="scrollbar"] {
+      padding-top: 1rem;
+    }
+    nav[data-type="scrollbar"] p {
+      opacity: 1;
+    }
+
+    /* Seek bars */
+    div[role="slider"] > label.icon {
+      background: no-repeat right top;
+      background-size: 3rem auto;
+    }
+    
+    /* Tabs */
+    #tabs .content {
+      padding: 0;
+    }
+    #tabs .content .content {
+      padding: 1.5rem 3rem;
+    }
+
+    /* Device rotation */
+    .landscape section[role="region"]#drawer > header:first-child {
+      /* Whatever needs to be changed on landscape */
+    }
+  </style>
+</head>
+<body>
+  <!--···························· Tuner screen ·····························-->
+  <section id="tuner" data-position="current">
+    <section id="drawer" role="region" class="skin-dark">
+      <header class="fixed">
+        <h1>rTuner</h1>
+      </header>
+      <article class="scrollable header">
+        <header><h2>Volume</h2></header>
+        <progress id="volume" value="0" max="100"></progress>
+        <header><h2>Note</h2></header>
+        <canvas id="note-meter"></canvas>
+        <header><h2>Info</h2></header>
+        <section data-type="list">
+          <ul>
+            <li>
+              <p id="difference">+0</p>
+              <p>Cents</p>
+            </li>
+            <li>
+              <p id="frequency">440</p>
+              <p>Herz</p>
+            </li>
+            <li>
+              <p id="octave">One-lined</p>
+              <p>Octave</p>
+            </li>
+          </ul>
+        </section>
+      </article>
+      <div role="toolbar">
+        <ul>
+          <li><button id="btn-settings" class="action-icon settings">Settings</button></li>
+        </ul>
+      </div>
+    </section> <!-- end drawer -->
+  </section> <!-- end index -->
+
+  <!--···························· Settings menu ····························-->
+  <section role="region" id="settings" data-position="right">
+    <section role="region" class="skin-dark">
+      <header class="fixed">
+        <a id="btn-settings-back" href="#"><span class="icon icon-back">back</span></a>
+        <h1>Settings</h1>
+      </header>
+      <article class="content scrollable header">
+        <header><h2>A4 note frequency</h2></header>
+          <div id="a-frequency" role="slider" aria-valuemin="400" aria-valuenow="440" aria-valuemax="480" aria-valuetext="slider description">
+            <label>440 Hz</label>
+            <div>
+              <progress value="440" max="480"></progress>
+              <button>handler</button>
+            </div>
+          </div>
+        <header><h2>Microphone gain</h2></header>
+          <div id="microphone-gain" role="slider" aria-valuemin="5" aria-valuenow="30" aria-valuemax="50" aria-valuetext="slider description">
+            <label>3.0</label>
+            <div>
+              <progress value="30" max="50"></progress>
+              <button>handler</button>
+            </div>
+          </div>
+      </article>
+    </section>
+  </section>
+
+  <script type="text/javascript" defer src="js/seekbars.js"></script>
+  <script type="text/javascript" defer src="js/nav.js"></script>
+  <script type="text/javascript" defer src="js/tuner.js"></script>
+
+</body>
+</html>
+
