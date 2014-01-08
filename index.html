@@ -19,8 +19,6 @@
         <p>A simple chromatic tuner for Firefox OS.</p>
 
         <p class="view"><a href="https://github.com/elmisto/rtuner">View the Project on GitHub <small>elmisto/rtuner</small></a></p>
-
-
         <ul>
           <li><a href="https://github.com/elmisto/rtuner/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href=# onclick="window.navigator.mozApps.install('http://elmisto.github.io/rtuner/webapp/manifest.webapp');">Install<strong>Webapp</strong></a></li>
@@ -29,36 +27,40 @@
       </header>
       <section>
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="about-rtuner" class="anchor" href="#about-rtuner"><span class="octicon octicon-link"></span></a>About rTuner</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>rTuner is a basic chromatic tuner designed for Firefox OS devices, but it can
+run on every modern browser. The program uses the <a href="http://www.cs.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf">MPM</a> algorithm for fast and
+robust pitch detection.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<a name="try-it-now" class="anchor" href="#try-it-now"><span class="octicon octicon-link"></span></a>Try it now!</h3>
+<div id="tester-placeholder">Click!</div>
+<iframe id="tester" style="display: none;"></iframe>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h3>
+<ul>
+  <li>Fast pitch detection with 3 cents accuracy.</li>
+  <li>Wide frequency range from A2 to A7.</li>
+  <li>Adjustable A4 base frequency from 400 to 480Hz.</li>
+  <li>Variable microphone gain settings.</li>
+</ul>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="planned-features" class="anchor" href="#planned-features"><span class="octicon octicon-link"></span></a>Planned features</h3>
+<ul>
+  <li>Pitch generator.</li>
+  <li>Different algorithms.</li>
+  <li>Wide range of adjustable settings.</li>
+</ul>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h3>
+<a name="bug-or-feature" class="anchor" href="#bug-or-feature"><span class="octicon octicon-link"></span></a>Bug or feature?</h3>
+
+<p>Having trouble with rTuner, or missing a cool feature? Feel free to open a
+new <a href="https://github.com/elmisto/rtuner/issues">issue</a> on the github
+page of the project.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/elmisto">elmisto</a></p>
@@ -66,6 +68,15 @@ $ git checkout gh-pages
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script>
+      var placeholder = document.getElementById("tester-placeholder");
+      var tester = document.getElementById("tester");
+      
+      placeholder.addEventListener("click", function() {
+        placeholder.style.display = "none";
+        tester.src = "webapp/index.html";
+        tester.style.display = "block";
+      })
+    </script>
   </body>
 </html>
