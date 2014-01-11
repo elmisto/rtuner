@@ -1,7 +1,7 @@
 {
   "name": "rTuner",
   "description": "A simple chromatic tuner.",
-  "launch_path": "/index.html",
+  "launch_path": "/index.html#tuner",
   "icons": {
     "32": "/res/icon-32.png",
     "60": "/res/icon-60.png",
