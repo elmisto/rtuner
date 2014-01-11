@@ -1,3 +1,11 @@
+// Incompatibility warning -----------------------------------------------------
+if(navigator.getMedia === undefined) {
+  document.querySelector('#confirm').className = 'fade-in';
+}
+document.getElementById('btn-confirm').addEventListener ('click', function () {
+  document.querySelector('#confirm').className = 'fade-out';
+});
+
 // Settings open ---------------------------------------------------------------
 document.querySelector('#btn-settings').addEventListener ('click', function () {
   cancelAnimFrame(requestId);

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/headers.css">
   <link rel="stylesheet" href="css/seekbars.css">
   <link rel="stylesheet" href="css/toolbars.css">
+  <link rel="stylesheet" href="css/confirm.css">
   <link rel="stylesheet" href="css/progress_activity.css">
   <link rel="stylesheet" href="css/lists.css">
 
@@ -154,6 +155,20 @@
   </style>
 </head>
 <body>
+
+  <!--···························· Action menu ······························-->
+  <section id="confirm" data-position="back" class="fullscreen">
+    <form role="dialog" data-type="confirm">
+      <section>
+        <h1>Warning</h1>
+        <p>This app requires WebRTC support <small>(Firefox OS 1.2+)</small></p>
+      </section>
+      <menu>
+        <a href=# id="btn-confirm"><button>Okay</button></a>
+      </menu>
+    </form>
+  </section>
+
   <!--···························· Tuner screen ·····························-->
   <section id="tuner" data-position="current">
     <section id="drawer" role="region" class="skin-dark">
@@ -219,9 +234,9 @@
     </section>
   </section>
 
+  <script type="text/javascript" defer src="js/tuner.js"></script>
   <script type="text/javascript" defer src="js/seekbars.js"></script>
   <script type="text/javascript" defer src="js/nav.js"></script>
-  <script type="text/javascript" defer src="js/tuner.js"></script>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
 /* ----------------------------------------------------------------- */
 
 /* Action menu */
+/*
 form[role="dialog"][data-type="action"],
 form[role="dialog"][data-type="object"],
 form[role="dialog"][data-type="confirm"] {
@@ -19,7 +20,7 @@ form[role="dialog"][data-type="object"] > header:first-child {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-
+*/
 /* Buttons */
 button,
 a[role="button"],
